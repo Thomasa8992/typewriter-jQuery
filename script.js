@@ -24,27 +24,18 @@ $( document ).ready(function() {
         }
     }); 
 });
-$('#sentence').append(sentences[0]);
 
 
 
     $(document).on('keydown', function(e) {
-        if (e.which == 16){
-            e.which +32;
-            handleHighlight(e.which);
-        } else {
-        handleHighlight(e.which);
-        }
+       handleHighlight(e.which);
         });
     $(document).on('keyup', function(e) {
-        handleHighlight(e.which + 32, true);
-        if (e.which == 16) {
-            handleHighlight(e.which);
-        } else {
-        handleHighlight(e.which);
-        }
-    
-    });    
+        var lowercase = /^[1-9][0-9]?$|^100$/;
+        handleHighlight(e.which, true);
+        
+    });  
+    $('#sentence').append(sentences[0]);  
 });
 
 function handleHighlight(code, defaultColor){

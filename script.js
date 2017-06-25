@@ -27,22 +27,75 @@ $( document ).ready(function() {
 
 
 
-    $(document).on('keydown', function(e) {
-       handleHighlight(e.which);
-        });
+
+
+
+
+
+
+
+    $(document).on('keypress', function(e) {
+        // if (e.which >= 65 || e.which <= 90 || e.which === 32 && e.which == 16) {
+                addHighlight(e.which);
+        // } 
+        // if(e.which === 48 || e.which >= 57 || e.which <= 57) {
+        //     addHighlight(e.which);
+        // }
+        // // if(e.which >= 65 || e.which <= 90){
+        // //      addHighlight(e.which + 32);
+        // // }
+        // if (e.whcih >= 33 || e.whcih >= 47 && e.which == 16){
+        //     addHighlight(e.which);
+        // }
+     });    
+
     $(document).on('keyup', function(e) {
-        var lowercase = /^[1-9][0-9]?$|^100$/;
-        handleHighlight(e.which, true);
-        
+        if (e.which >= 65 || e.which <= 90 || e.which >= 123 || e.which <= 126 && e.which == 16) {
+                removeHighlight(e.which);
+        }
+        if(e.which === 32 || e.which >= 48 || e.which <= 57) {
+            removeHighlight(e.which);
+        }
+         if(e.which >= 65 || e.which <= 90){
+             removeHighlight(e.which + 32);
+        } 
+        if (e.whcih === 50 && e.which == 16){
+            addHighlight(e.which + 14);
+        }
     });  
+
+
+
+
+
+
     $('#sentence').append(sentences[0]);  
 });
 
-function handleHighlight(code, defaultColor){
-        if (defaultColor){
-            $('#' + code).css('background-color', '#f5f5f5');
-        } else {
+function addHighlight(code){
+        // if (defaultColor){
+        //     $('#' + code).css('background-color', '#f5f5f5');
+        // } else {
             $('#' + code).css('background-color', 'yellow');
-        }
+        // }
 }
 
+function removeHighlight(code, defaultColor){
+        // if (defaultColor){
+        //     $('#' + code).css('background-color', '#f5f5f5');
+        // } else {
+            $('#' + code).css('background-color', '#f5f5f5');
+        // }
+}
+
+// function between(x, min, max) {
+//   return x >= min && x <= max;
+// }
+// // ...
+// function between(x, min, max) {
+//   return x >= min && x <= max;
+// }
+// // ...
+// if (between(x, 0.001, 0.009)) {
+//   // something
+// }

@@ -15,7 +15,6 @@ $( document ).ready(function() {
         if (e.which === 16) {
             $('#keyboard-lower-container').hide();
             $('#keyboard-upper-container').show();
-            console.log(e.which);
         }
     $(document).on('keyup',function(e){
         if (e.which === 16) {
@@ -34,34 +33,37 @@ $( document ).ready(function() {
 
 
 
-    $(document).on('keypress', function(e) {
-        // if (e.which >= 65 || e.which <= 90 || e.which === 32 && e.which == 16) {
-                addHighlight(e.which);
+    $(document).on('keydown', function(e) {
+        // if (e.which >= 65 || e.which <= 90 || e.which === 32 && e.which == e.shiftKey) {
+        //         console.log(e.which);
         // } 
-        // if(e.which === 48 || e.which >= 57 || e.which <= 57) {
+        // if(e.which === 48 || e.which >= 48 || e.which <= 57) {
         //     addHighlight(e.which);
         // }
-        // // if(e.which >= 65 || e.which <= 90){
-        // //      addHighlight(e.which + 32);
-        // // }
-        // if (e.whcih >= 33 || e.whcih >= 47 && e.which == 16){
-        //     addHighlight(e.which);
+        // if(e.which >= 65 || e.which <= 90){
+        //      addHighlight(e.which + 32);
+        // }
+        // if (e.whcih >= 51 || e.whcih >= 53 && e.shiftKey){
+        //     addHighlight(e.which - 18);
+        // }
+        // if (e.which === 49 && e.shiftKey){
+        //     addHighlight(e.which -16);
         // }
      });    
 
     $(document).on('keyup', function(e) {
-        if (e.which >= 65 || e.which <= 90 || e.which >= 123 || e.which <= 126 && e.which == 16) {
-                removeHighlight(e.which);
-        }
-        if(e.which === 32 || e.which >= 48 || e.which <= 57) {
-            removeHighlight(e.which);
-        }
-         if(e.which >= 65 || e.which <= 90){
-             removeHighlight(e.which + 32);
-        } 
-        if (e.whcih === 50 && e.which == 16){
-            addHighlight(e.which + 14);
-        }
+        // if (e.which >= 65 || e.which <= 90 || e.which >= 123 || e.which <= 126 && e.which == 16) {
+        //         removeHighlight(e.which);
+        // }
+        // if(e.which === 48 || e.which >= 48 || e.which <= 57) {
+        //     removeHighlight(e.which);
+        // }
+        //  if(e.which >= 65 || e.which <= 90){
+        //      removeHighlight(e.which + 32);
+        // } 
+        // if (e.which === 49 && e.shiftKey){
+        //     removeHighlight(e.which -16);
+        // }
     });  
 
 

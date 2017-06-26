@@ -12,7 +12,7 @@
 #yellow-block {
   position: absolute;
   margin-top: 10px;
-  width: 15px;
+  width: 0px;
   height: 15px;
   background-color: yellow;
 }
@@ -39,8 +39,4 @@
 
 .glyphicon-remove {
   color : #CD2626
-}
-
-.highlight {
-  background-color: yellow;
 }

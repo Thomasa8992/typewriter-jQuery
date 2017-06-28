@@ -1,19 +1,19 @@
-    var sentences = ['ten ate neite ate nee enet ite ate inet ent eate',
+$(document).ready(function () {
+    var sentences = ['ten ate neite ate nee enet ite ate inet ent eate', 
     'Too ato too nOt enot one totA not anot tOO aNot', 
     'oat itain oat tain nate eate tea anne inant nean', 
-    'itant eate anot eat nato inate eat anot tain eat' , 
+    'itant eate anot eat nato inate eat anot tain eat', 
     'nee ene ate ite tent tiet ent ine ene ete ene ate'];
-    var mistakes = 0;
-    var letterCounter = 0;
     var sentenceCounter = 0;
+    var letterCounter = 0;
+    var targetLetter = $("#target-letter");
+    targetLetter.html(currentLetter);
     var currentSentence = sentences[0];
-    var currentLetter;
-
-$( document ).ready(function() {
-    $('#keyboard-upper-container').hide();
-    $('#target-letter').append(sentences[0][letterCounter++]);
-    showSentence();
-    //switches between lowercase and uppercase
+    var currentLetter = currentSentence[0];
+    var mistakes = 0; 
+    $("#sentence").append(currentSentence); 
+    $("#target-letter").append(currentLetter); 
+    $("#keyboard-upper-container").hide(); 
     $(document).on('keydown',function(e){
         if (event.which === 16) {
             $('#keyboard-lower-container').hide();
@@ -25,7 +25,7 @@ $( document ).ready(function() {
         if(e.which >= 65 || e.which <= 90){
              addHighlight(e.which + 32);
         }
-    }); 
+    });
     $(document).on('keyup',function(e){
         if (event.which === 16) {
         $('#keyboard-upper-container').hide();
@@ -38,51 +38,39 @@ $( document ).ready(function() {
              removeHighlight(e.which + 32);
         }
     });
-    $(document).on('keypress', function(e) {
-        showText();
+    $(document).keypress(function (event) {
+        var currentSentence = sentences[sentenceCounter];
+        var currentLetter = currentSentence[letterCounter];
+        $("#yellow-block").css("left", "+=17.5px"); 
+        letterCounter++;
+        var nextLetter = currentSentence[letterCounter]; 
+        targetLetter.html(nextLetter); 
+        if (letterCounter == currentSentence.length) { 
+            $("#sentence").empty(); 
+            sentenceCounter++; 
+            currentSentence = sentences[sentenceCounter]; 
+            $("#sentence").append(sentences[sentenceCounter]); 
+            letterCounter = 0; 
+            if (sentenceCounter < sentences.length - 1) { 
+                var nextLetter = currentSentence[letterCounter];
+            }
+            targetLetter.html(nextLetter); 
+            $("#yellow-block").css({left:17}); 
+            $("#feedback").empty(); 
+        }
+        if (letterCounter < currentSentence.length -1) { 
+            if (event.which === currentLetter.charCodeAt()) { 
+                $("#feedback").append("<i class = 'glyphicon glyphicon-ok'></i>"); 
+            } else {
+                $("#feedback").append("<i class = 'glyphicon glyphicon-remove'></i>"); 
+                mistakes++; 
+            }
+        }
     });
-});
-function addHighlight(code, color){
+    function addHighlight(code, color){
     $('#' + code).css('background-color', 'yellow');
 }
 function removeHighlight(code, defaultColor){
     $('#' + code).css('background-color', '#f5f5f5');
 }
-function showText(code) {   
-    if (letterCounter < currentSentence.length) {        
-        $('#target-letter').empty();
-        $('#target-letter').append(currentSentence[letterCounter++]);
-        $( "#yellow-block" ).animate({ "left": "+=17.5px" }, 'fast' ); 
-    }       
-}
-function showSentence() {   
-    $('#sentence').empty();
-    $('#sentence').append(sentences[sentenceCounter++]);
-}
-function glyphiconTest(code){
-        $('#feedback').append('<span class="glyphicon glyphicon-ok"></span>');
-        $('#feedback').append('<span class="glyphicon glyphicon-remove"></span>');
-    }
-    
-// var letterCodeIWantToHit = 97;    
-// function handleResponse(code) {
-//     if (code === letterCodeIWantToHit) {
-//         glyphiconTest(true);
-//         letterCounter++;
-//         if (letterImOn > lettersInSentence) {
-//             goToNextSentence();
-//         }
-//     } else {
-//         glyphiconTest(false);
-//     }
-// }
-
-// function handleResponse(code){
-//     if(code === sentences[0].charCodeAt(letterCounter++)){
-//         glyphiconTest(true);
-//         letterCounter++;
-//     if()
-        
-//     }
-// }
-
+});
